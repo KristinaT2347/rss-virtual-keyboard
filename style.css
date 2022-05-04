@@ -1,1 +1,16 @@
+* {
+  box-sizing: border-box;
+}
 
+h1 {
+  text-align: center;
+  color: rgb(103, 87, 206);
+}
+
+textarea {
+  display: block;
+  margin: 0 auto;
+  margin-top: 5%;
+  width: 500px;
+  height: 150px;
+}
