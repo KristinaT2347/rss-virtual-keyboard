@@ -13,7 +13,27 @@ class Keyboard {
   properties = {
     value: '',
     capsLock: false,
+    layout: 'en',
   };
+
+  constructor() {
+    this.elements.main = document.createElement('div');
+    this.elements.keysContainer = document.createElement('div');
+
+    this.elements.main.classList.add(
+      'keyboard-container',
+      'keyboard-container--hidden',
+    );
+    this.elements.keysContainer.classList.add('keyboard-container__keys');
+    this.elements.keysContainer.appendChild(this.createKeys());
+
+    this.elements.keys = this.elements.keysContainer.querySelectorAll(
+      '.keyboard-container__key',
+    );
+
+    this.elements.main.appendChild(this.elements.keysContainer);
+    document.body.appendChild(this.elements.main);
+  }
 
   createKeys() {
     const fragment = document.createDocumentFragment();
@@ -174,6 +194,9 @@ class Keyboard {
           break;
       }
 
+      keyElement.dataset.en = key.en;
+      keyElement.dataset.ru = key.ru;
+
       fragment.appendChild(keyElement);
 
       if (key.lineBreak) {
@@ -199,31 +222,39 @@ class Keyboard {
   }
 
   open() {
-    this.elements.main = document.createElement('div');
-    this.elements.keysContainer = document.createElement('div');
-
-    this.elements.main.classList.add(
-      'keyboard-container',
-      '2keyboard-container--hidden',
-    );
-    this.elements.keysContainer.classList.add('keyboard-container__keys');
-    this.elements.keysContainer.appendChild(this.createKeys());
-
-    this.elements.keys = this.elements.keysContainer.querySelectorAll(
-      '.keyboard-container__key',
-    );
-
-    this.elements.main.appendChild(this.elements.keysContainer);
-    document.body.appendChild(this.elements.main);
+    this.elements.main.classList.remove('keyboard-container--hidden');
+    this.addEventListeners();
   }
 
-  close() {}
+  close() {
+    this.elements.main.classList.add('keyboard-container--hidden');
+  }
+
+  addEventListeners() {
+    document.addEventListener('keydown', (e) => {
+      if (
+        (e.code === 'ShiftLeft' && e.altKey)
+        || (e.code === 'AltLeft' && e.shiftKey)
+      ) {
+        this.changeLayout();
+      }
+    });
+  }
+
+  changeLayout() {
+    if (this.layout === 'en') {
+      this.layout = 'ru';
+    } else {
+      this.layout = 'en';
+    }
+
+    for (const key of this.elements.keys) {
+      key.textContent = key.dataset[this.layout];
+    }
+  }
 }
 
 const keyboard = new Keyboard();
-window.addEventListener('DOMContentLoaded', () => {
-  keyboard.open();
-});
 
 const title = document.createElement('h1');
 title.textContent = 'RSS VIRTUAL KEYBOARD';
@@ -231,4 +262,4 @@ document.body.append(title);
 
 const textArea = document.createElement('textarea');
 document.body.append(textArea);
-textArea.addEventListener('focus', () => {});
+textArea.addEventListener('focus', () => keyboard.open());
