@@ -1,0 +1,14 @@
+{
+  "extends": ["airbnb-base"],
+  "env": {
+    "browser": true
+  },
+  "parserOptions": {
+    "ecmaVersion": "latest"
+},
+  "rules": {
+    "class-methods-use-this": "off",
+    "no-restricted-syntax": "off",
+    "operator-linebreak": "off"
+  }
+}
