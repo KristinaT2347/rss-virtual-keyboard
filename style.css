@@ -66,6 +66,16 @@ textarea {
 .keyboard-container__key:active,
 .keyboard-container__key--active {
   background: rgba(255, 255, 255, 0.12);
+  animation: buttonClick 0.1s;
+}
+
+@keyframes buttonClick {
+  from {
+    transform: none;
+  }
+  to {
+    transform: translateY(3px);
+  }
 }
 
 .keyboard-container__key--wide {
