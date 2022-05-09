@@ -106,6 +106,9 @@ class Keyboard {
   ];
 
   constructor() {
+    const lang = localStorage.getItem('lang') || 'en';
+    this.properties.layout = lang;
+
     this.elements.main = document.createElement('div');
     this.elements.keysContainer = document.createElement('div');
 
@@ -314,6 +317,8 @@ class Keyboard {
     } else {
       this.properties.layout = 'en';
     }
+
+    localStorage.setItem('lang', this.properties.layout);
 
     for (const key of this.elements.keys) {
       if (key.dataset[this.properties.layout]) {
