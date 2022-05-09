@@ -63,7 +63,8 @@ textarea {
   -webkit-tap-highlight-color: transparent;
 }
 
-.keyboard-container__key:active, .keyboard-container__key--active {
+.keyboard-container__key:active,
+.keyboard-container__key--active {
   background: rgba(255, 255, 255, 0.12);
 }
 
@@ -89,4 +90,12 @@ textarea {
 
 .keyboard-container__key--active::after {
   background: #09ccf3;
+}
+
+h3 {
+  padding-top: 1%;
+  text-align: center;
+  color: #026285f5;
+  max-width: 31%;
+  margin: 0 auto;
 }
