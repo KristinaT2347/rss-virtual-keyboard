@@ -339,3 +339,8 @@ document.body.append(title);
 const textArea = document.createElement('textarea');
 document.body.append(textArea);
 textArea.addEventListener('focus', () => keyboard.open(textArea));
+
+const text = document.createElement('h3');
+text.textContent =
+  'Клавиатура создана в операционной системе Windows Для переключения языка комбинация: левыe shift + alt';
+document.body.append(text);
